@@ -89,9 +89,9 @@ body{
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-    overflow-y: scroll;
+    overflow-y: auto;
     /* for showing playlist window */
-    max-height: 66vh;  
+    max-height: 70vh;  
 }
 .card{
     width: 200px;
@@ -165,7 +165,7 @@ body{
     width: 90%;
     padding: 12px;
     width: 70vw;
-    height: 40px;
+    min-height: 40px;
 }
 
 .songbuttons{
@@ -179,6 +179,17 @@ body{
     overflow: auto;
     margin-bottom: 44px;
 }
+
+.hamburger{
+    display: none;
+}
+.hamburgerContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+}
+
 .songList ul{
     padding: 0 12px;  /* comment : "make padding: 0 0; for better ui in playlist section." */
 }
@@ -213,13 +224,14 @@ body{
 }
 
 .seekbar{
-    height: 2px;
+    height: 4px;
     width: 98%;
     background: black;
     border-radius: 10px;
     position: absolute;
     bottom: 0;
     margin: 6px;
+    cursor: pointer;
 }
 .circle{
     width: 13px;
@@ -245,4 +257,48 @@ body{
 .abovebar{
     display: flex;
     justify-content: space-between;
+    margin: 20px 0;
+}
+
+
+@media (max-width: 1400px) {
+    .left{
+        background-color: black;
+        position: absolute;
+        left: -120%;
+        transition: all .3s;
+        z-index: 1;
+        width: 373px;
+    }
+
+    .close{
+        position: absolute;
+        right: 30px;
+        top: 31px;
+        width: 30px;
+    }
+
+
+
+    .right{
+        width: 100vw;
+    }
+    .playbar{
+        width: calc(100vw - 60px);
+    }
+    .seekbar{
+        width: calc(100vw - 70px);
+    }
+
+    .hamburger{
+        display: block;
+    }
+
+    .card{
+        width: 90vww;
+    }
+    .cardContainer{
+        margin: 0;
+        justify-content: center;
+    }
 }

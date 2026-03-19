@@ -2,6 +2,22 @@
 let currentSong = new Audio();
 
 
+function secondsToMinutesSeconds(seconds) {
+    if (isNaN(seconds) || seconds < 0) {
+        return "00:00";
+    }
+
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+
+    // Add leading zero if needed
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+
+    return `${formattedMinutes}:${formattedSeconds}`;
+}
+
+//retreive songs from folders
 async function getSongs() {
     let a = await fetch("http://127.0.0.1:3000/songs/");
     let response = await a.text();
@@ -26,21 +42,23 @@ async function getSongs() {
 
 
 // play one music track at a time when clicked. 
-const playMusic = (track)=>{
+const playMusic = (track, pause=false )=>{
     currentSong.src = "/songs/"+ track; // find the song source file
-    currentSong.play(); // plays the music
-    play.src = "pause.svg"; // play.src = "pause.svg" when a new song clicked
+    if(!pause){
+        currentSong.play();
+        play.src = "pause.svg"; // play.src = "pause.svg" when a new song clicked
+    }
+    // currentSong.play(); // plays the music
 
-    document.querySelector(".songinfo").innerHTML = track;
+    document.querySelector(".songinfo").innerHTML = decodeURI(track);
     document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
 }
 
 async function main() {
-
-    
-
     // get the songs list from directory
     let songs = await getSongs();
+
+    playMusic(songs[0], true); // by default get ready to playy the first song of the playlist
 
     
 
@@ -74,15 +92,42 @@ async function main() {
         if(currentSong.paused){
             currentSong.play();
             play.src = "pause.svg";
-            console.clear();
-            console.log("changed to PLAY btn.");
         }
         else{
             currentSong.pause();
             play.src = "play.svg";
-            console.clear();
-            console.log("changed to PAUSE btn.");
         }
+    })
+
+
+    // Task 1 : shows currentTime/duration of current playing song.
+    // Task 2 : seekbar moves while playing a song.
+    // Listen for timeupdate event.
+    currentSong.addEventListener("timeupdate", ()=>{
+        console.log(currentSong.currentTime, currentSong.duration);
+        
+        // Task 1
+        document.querySelector(".songtime").innerHTML = (`${secondsToMinutesSeconds(currentSong.currentTime)} / ${secondsToMinutesSeconds(currentSong.duration)}`); 
+
+        // Task 2
+        document.querySelector(".circle").style.left = (currentSong.currentTime/ currentSong.duration) * 100 + "%";
+    })
+
+
+    // Add event listener to seekbar for going to a specific time
+    document.querySelector(".seekbar").addEventListener("click", e=> {
+        let percent = ( e.offsetX / e.target.getBoundingClientRect().width ) * 100
+        document.querySelector(".circle").style.left = percent + "%";
+        currentSong.currentTime = ( currentSong.duration * percent ) / 100 ;
+    })
+
+    // Add event listener for hamburger
+    document.querySelector(".hamburger").addEventListener("click", ()=>{
+        document.querySelector(".left").style.left = "0";
+    })
+    // Add event listener for close button
+    document.querySelector(".close").addEventListener("click", ()=>{
+        document.querySelector(".left").style.left = "-120%";
     })
 
 
