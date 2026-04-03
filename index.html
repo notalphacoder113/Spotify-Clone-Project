@@ -5,28 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spotify - Web Player: Music for everyone</title>
-    <link rel="stylesheet" href="utility.css">
-    <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="css/utility.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
     <div class="container flex bg-black">
         <div class="left">
             <div class="close">
-                <img width="30" class="invert" src="close.svg" alt="colse">
+                <img width="30" class="invert" src="img/close.svg" alt="colse">
             </div>
             <div class="home bg-grey rounded m-1 p-1">
-                <div class="logo"> <img class="invert" src="logo.svg" alt="logo"></div>
+                <div class="logo"> <img class="invert" src="img/logo.svg" alt="logo"></div>
                 <ul>
-                    <li><img class="invert" src="home.svg" alt="home">Home</li>
-                    <li><img class="invert" src="search.svg" alt="search">Search</li>
+                    <li><img class="invert" src="img/home.svg" alt="home">Home</li>
+                    <li><img class="invert" src="img/search.svg" alt="search">Search</li>
                 </ul>
             </div>
 
             <div class="library bg-grey rounded m-1 p-1">
                 <div class="heading">
-                    <img class="invert" src="playlist.svg" alt="playlist">
+                    <img class="invert" src="img/playlist.svg" alt="playlist">
                     <h2>Your library</h2>
                 </div>
                 <div class="songList">
@@ -51,7 +50,7 @@
             <div class="header">
                 <div class="nav">
                     <div class="hamburgerContainer">
-                        <img class="invert hamburger" width="40" src="hamburger.svg" alt="hamburger">
+                        <img class="invert hamburger" width="40" src="img/hamburger.svg" alt="hamburger">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M15 6L9.70711 11.2929C9.37377 11.6262 9.20711 11.7929 9.20711 12C9.20711 12.2071 9.37377 12.3738 9.70711 12.7071L15 18"
@@ -72,36 +71,9 @@
             </div>
 
             <div class="spotifyPlaylists">
-                <h1>spotify Playlists</h1>
+                <h1>Spotify Playlists</h1>
                 <div class="cardContainer">
-                    <div class="card">
-                        <div class="play">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                        <img src="https://i.scdn.co/image/ab67706f00000002b55b6074da1d43715fc16d6d" alt="">
-                        <h2>Happy Hits!</h2>
-                        <p>Hits to boost your mood and fill you with happiness!</p>
-                    </div>
-
-
-                    <div class="card">
-                        <div class="play">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                        <img src="https://i.scdn.co/image/ab67706f00000002b55b6074da1d43715fc16d6d" alt="">
-                        <h2>Happy Hits!</h2>
-                        <p>Hits to boost your mood and fill you with happiness!</p>
-                    </div>
-
-
+                    <!--cards generated here -->
                 </div>
                 <div class="playbar">
                     <div class="seekbar">
@@ -116,20 +88,28 @@
 
                         </div>
                         <div class="songbuttons">
-                            <img id="previous" src="prevsong.svg" alt="prevsong">
-                            <img id="play" src="play.svg" alt="play-pause">
-                            <img id="next" src="nextsong.svg" alt="nextsong">
+                            <img width="35" id="previous" src="img/prevsong.svg" alt="prevsong">
+                            <img width="35" id="play" src="img/play.svg" alt="play-pause">
+                            <img width="35" id="next" src="img/nextsong.svg" alt="nextsong">
                         </div>
-                        <div class="songtime">
 
+                        <div class="timevol">
+                            <div class="songtime"></div>
+                            <div class="volume">
+                                <img width="25" src="img/volume.svg" alt="volume">
+                                <div class="range">
+                                    <input type="range" name="volume" id="">
+                                </div>
+                            </div>
                         </div>
+
                     </div>
 
                 </div>
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>

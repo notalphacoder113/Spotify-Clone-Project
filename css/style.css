@@ -4,6 +4,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap');
 
+:root{
+    --a : 0;
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -14,7 +18,9 @@ body{
     background-color: black;
     color: white;
 }
-
+.close{
+    display: none;
+}
 .left{
     width: 25vw;
     padding: 10px;
@@ -83,6 +89,9 @@ body{
 .spotifyPlaylists{
     padding: 16px;
 }
+.spotifyPlaylists h1{
+    padding: 16px;
+}
 
 .cardContainer{
     margin: 30px;
@@ -91,7 +100,7 @@ body{
     flex-wrap: wrap;
     overflow-y: auto;
     /* for showing playlist window */
-    max-height: 70vh;  
+    max-height: 60vh;
 }
 .card{
     width: 200px;
@@ -99,6 +108,12 @@ body{
     border-radius: 5px;
     background-color: #252525;
     position: relative;
+    transition: all .9s;
+}
+.card:hover {
+    background-color: rgb(105, 103, 103);
+    cursor: pointer;
+    --a : 1;
 }
 .card > *{
     padding-top: 10px;
@@ -119,9 +134,9 @@ body{
     align-items: center; 
     justify-content: center;
     position: absolute;
-    top: 168px;
+    bottom: 88px;
     right: 17px;
-    opacity: 0;
+    opacity: var(--a);
     transition: all 1s ease-out;
 }
 
@@ -157,6 +172,9 @@ body{
 
 
 .playbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     bottom: 30px;
     filter: invert(1);
@@ -182,6 +200,7 @@ body{
 
 .hamburger{
     display: none;
+    cursor: pointer;
 }
 .hamburgerContainer{
     display: flex;
@@ -208,8 +227,10 @@ body{
 
 .songList .info{
     font-size: 13px;
-    width: 344px;
-    
+    width: 344px;   
+}
+.info div{
+    word-break: break-all;
 }
 
 .playnow{
@@ -229,7 +250,7 @@ body{
     background: black;
     border-radius: 10px;
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
     margin: 6px;
     cursor: pointer;
 }
@@ -249,11 +270,32 @@ body{
     cursor: pointer;
 }
 
-.songinfo, .songtime{
+.timevol{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.songinfo {
     color: black;
     padding: 0 12px;
+    width: 250px;
+}
+.songtime{
+    color: black;
+    padding: 0 12px;
+    width: 125px;
 }
 
+.volume{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+.range input{
+    cursor: pointer;
+}
 .abovebar{
     display: flex;
     justify-content: space-between;
@@ -261,14 +303,23 @@ body{
 }
 
 
-@media (max-width: 1400px) {
+/* for tablet */
+@media (max-width: 1200px) {
     .left{
-        background-color: black;
         position: absolute;
-        left: -120%;
+        background-color: black;
+        left: -130%;
         transition: all .3s;
         z-index: 1;
         width: 373px;
+        padding: 0;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+    }
+
+    .songinfo .songtime{
+        width: auto;
     }
 
     .close{
@@ -278,27 +329,86 @@ body{
         width: 30px;
     }
 
-
+    .timevol{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 13px;
+    }
 
     .right{
         width: 100vw;
     }
     .playbar{
-        width: calc(100vw - 60px);
+        width: calc(100vw - 75px);
     }
     .seekbar{
-        width: calc(100vw - 70px);
+        width: calc(100vw - 120px);
     }
 
     .hamburger{
         display: block;
     }
+    .right{
+        margin: 0;
+    }
 
     .card{
-        width: 90vww;
+        width: 55vw;
     }
     .cardContainer{
         margin: 0;
         justify-content: center;
     }
+
+    .close{
+        display: block;
+    }
+    .abovebar{
+        flex-direction: column;
+        gap: 23px;
+        align-items: center;
+    }
+
+    .cardContainer{
+        max-height: unset;
+        overflow-y: unset;
+        margin-bottom: 35vh;
+    }
+    .playbar{
+        right: 25px;
+    }
+}
+
+/* for iphone */
+@media (max-width : 500px) {
+    .card{
+        width: 100%;
+    }
+     
+    .header>* {
+        padding: 2px;
+    }
+    
+    .buttons>* {
+        margin: 0 6px;
+    }
+
+    .spotifyPlaylists h1{
+        padding: 4px;
+    }
+    
+    .hearder{
+        padding: 7px;
+    }
+
+    .library{
+        height: 85vh;
+    }
+
+    .left{
+        width: 100vw;
+    }
+     
 }
